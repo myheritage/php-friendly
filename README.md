@@ -2,7 +2,7 @@
 A utility for adding non-native class friendship capabilities to PHP applications
 
 ## Overview
-The friend classes [RFC](https://wiki.php.net/rfc/friend-classes) suggested that friend classes would be php-native feature. Since it was declided we've decided to develop our own non-native solution that solves the same problem - how to make multiple classes under the same namespace "friends", and let them call each-other's protected methods.
+The friend classes [RFC](https://wiki.php.net/rfc/friend-classes) suggested that friend classes would be a php-native feature. Since it was declined we've decided to develop our own non-native solution that solves the same problem - how to make multiple classes under the same namespace "friends", and let them call each-other's protected methods.
 
 ## Requirements
 * PHP >= 7.3
