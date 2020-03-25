@@ -1,0 +1,7 @@
+version: '3.2'
+
+services:
+  test-runner:
+    build: .
+    volumes:
+      - .:/opt/php-friendly
