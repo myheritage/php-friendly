@@ -18,5 +18,6 @@
             "MyHeritage\\Friends\\Tests\\": "tests/Friends/Tests"
         }
     },
+    "minimum-stability": "dev",
     "license": "MIT"
 }
