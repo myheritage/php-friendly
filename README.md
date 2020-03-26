@@ -52,11 +52,11 @@ Note that the caller must pass itself (`$this`) as a parameter to the callee fun
 <?php
 namespace MyHeritage\Friends\Tests\Friendly;
 
-class AnotherFriendlyClass
+class MyClass
 {
-    public function callMe()
+    public function getHelpFromAFriend()
     {
-        echo (new AFriendlyClass())->friendlyMethod('hello', $this);
+        echo (new AFriendlyClass())->friendlyMethod('hello, can you give a hand?', $this);
     }
 }
 ```
