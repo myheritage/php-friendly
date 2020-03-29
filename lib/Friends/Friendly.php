@@ -7,11 +7,11 @@ use ReflectionException;
 use ReflectionMethod;
 
 /**
- * Use this trait to enable making protected methods friends with classes of the same namespace
+ * Use this trait to enable making protected methods friends with classes of the same/nested namespace
  * In order to make "friendly" methods you will need to:
  * 1. use this trait
  * 2. Annotate protected methods that you want to expose with @friendly annotation
- * 3. Add $caller optional parameter to the for the sake of better phpdoc
+ * 3. Add $caller optional parameter for the sake of better phpdoc
  *
  * A friend class that wants to call a friendly method in your class must pass itself ($this) to the method it calls as the last parameter
  *
