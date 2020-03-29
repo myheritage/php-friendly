@@ -54,7 +54,7 @@ namespace MyHeritage\Friends\Tests\Friendly;
 
 class MyClass
 {
-    public function getHelpFromAFriend()
+    public function getHelpFromAFriendlyClass()
     {
         echo (new AFriendlyClass())->friendlyMethod('hello, can you give a hand?', $this);
     }
