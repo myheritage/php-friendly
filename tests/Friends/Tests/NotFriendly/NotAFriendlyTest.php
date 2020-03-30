@@ -13,7 +13,7 @@ class NotAFriendlyTest extends TestCase
 
         $friendlyClass = new AFriendlyClass();
         $message = "test";
-        $result = $friendlyClass->friendlyMethod($message, $this);
+        $result = $friendlyClass->friendlyMethod($message);
         $this->assertEquals($message, $result);
     }
 }

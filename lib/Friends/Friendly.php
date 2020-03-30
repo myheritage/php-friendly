@@ -3,7 +3,6 @@ namespace MyHeritage\Friends;
 
 use Exception;
 use ReflectionClass;
-use ReflectionException;
 use ReflectionMethod;
 
 /**
@@ -23,6 +22,7 @@ use ReflectionMethod;
 trait Friendly
 {
     private $friendlyMethods;
+    private $myNamespace;
 
     /**
      * Call this method in your constructor as a best practice. Otherwise - this method will be
@@ -42,6 +42,7 @@ trait Friendly
                 }
                 $this->friendlyMethods[] = $method->getName();
             }
+            $this->myNamespace = $reflection->getNamespaceName();
         } catch (Exception $e) {
             throw new FriendlyInitializationException("Failed to initialize freindly methods", 0, $e);
         }
@@ -56,29 +57,32 @@ trait Friendly
      * @param $name
      * @param $arguments
      * @return mixed
-     * @throws ReflectionException
      * @throws Exception
      */
     public function __call($name, $arguments)
     {
-        if (!isset($this->friendlyMethods)) {
+        if (!isset($this->friendlyMethods) || !isset($this->myNamespace)) {
             $this->makeFriends();
         }
-        if (count($arguments) < 1) {
-            throw new Exception("Must have at least one parameter which is the caller object");
-        }
-        $caller = end($arguments);
-        if (!is_object($caller)) {
-            throw new Exception("last parameter must be an object");
-        }
-        $caller = new ReflectionClass($caller);
-        $me = new ReflectionClass($this);
-        if (strpos($caller->getNamespaceName(), $me->getNamespaceName()) !== 0) {
+        if (strpos($this->getCallerNamespace(), $this->myNamespace) !== 0) {
             throw new Exception("Caller is not of the same namespace, can't be a friend");
         }
         if (!in_array($name, $this->friendlyMethods)) {
             throw new Exception("{$name} is not a friendly method");
         }
-        return call_user_func_array([$this, $name], array_slice($arguments,0, -1));
+        return call_user_func_array([$this, $name], $arguments);
+    }
+
+    /**
+     * @return string The caller object namespace
+     * @throws Exception
+     */
+    private function getCallerNamespace(): string {
+        // <caller-method> -> __call -> getCallerNamespace() (need to go back 3 steps)
+        $backtrace = debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT, 3);
+        if (count($backtrace) < 3 || empty($backtrace[2]['class'])) {
+            throw new Exception("Cannot resolve caller namespace");
+        }
+        return implode('\\', explode('\\', $backtrace[2]['class'], -1));
     }
 }
