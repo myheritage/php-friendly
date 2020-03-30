@@ -79,7 +79,7 @@ trait Friendly
      */
     private function getCallerNamespace(): string {
         // <caller-method> -> __call -> getCallerNamespace() (need to go back 3 steps)
-        $backtrace = debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT, 3);
+        $backtrace = debug_backtrace(0, 3);
         if (count($backtrace) < 3 || empty($backtrace[2]['class'])) {
             throw new Exception("Cannot resolve caller namespace");
         }
