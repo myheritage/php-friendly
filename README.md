@@ -16,7 +16,7 @@ $ composer require myheritage/php-friendly
 
 ## Usage example
 ### Callee
-Shared / Exposed functions must be annotated with the `@friendly` annotation and have the caller as the last parameter to the function
+Shared / Exposed functions must be annotated with the `@friendly` annotation
 ```
 <?php
 namespace MyHeritage\Friends\Tests\Friendly;
@@ -30,11 +30,9 @@ class AFriendlyClass
     /**
      * @friendly
      * @param $message
-     * @param $caller
-     *
      * @return mixed
      */
-    protected function friendlyMethod($message, $caller = null)
+    protected function friendlyMethod($message)
     {
         return $message;
     }
@@ -47,7 +45,6 @@ class AFriendlyClass
 ```
 
 ### Caller
-Note that the caller must pass itself (`$this`) as a parameter to the callee function.
 ```
 <?php
 namespace MyHeritage\Friends\Tests\Friendly;
@@ -56,7 +53,7 @@ class MyClass
 {
     public function getHelpFromAFriendlyClass()
     {
-        echo (new AFriendlyClass())->friendlyMethod('hello, can you give a hand?', $this);
+        echo (new AFriendlyClass())->friendlyMethod('hello, can you give a hand?');
     }
 }
 ```

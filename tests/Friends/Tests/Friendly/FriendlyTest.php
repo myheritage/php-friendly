@@ -8,7 +8,7 @@ class FriendlyTest extends TestCase
     {
         $friendlyClass = new AFriendlyClass();
         $message = "test";
-        $result = $friendlyClass->friendlyMethod($message, $this);
+        $result = $friendlyClass->friendlyMethod($message);
         $this->assertEquals($message, $result);
     }
 
@@ -17,6 +17,6 @@ class FriendlyTest extends TestCase
         $this->expectExceptionObject(new \Exception('notFriendly is not a friendly method'));
         $friendlyClass = new AFriendlyClass();
         $message = "test";
-        $friendlyClass->notFriendly($message, $this);
+        $friendlyClass->notFriendly($message);
     }
 }

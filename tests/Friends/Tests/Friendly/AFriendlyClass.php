@@ -10,11 +10,10 @@ class AFriendlyClass
     /**
      * @friendly
      * @param $message
-     * @param $caller
      *
      * @return mixed
      */
-    protected function friendlyMethod($message, /** @noinspection PhpUnusedParameterInspection  */ $caller = null)
+    protected function friendlyMethod($message)
     {
         return $message;
     }
